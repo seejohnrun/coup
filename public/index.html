@@ -37,13 +37,13 @@
       <hr/>
 
       <div class="pull-right">
-        <button class="btn btn-success btn-bl" ng-click="addMoney(1)" ng-disabled="canAdd(1)">+1</button>
-        <button class="btn btn-success btn-bl" ng-click="addMoney(2)" ng-disabled="canAdd(2)">+2</button>
-        <button class="btn btn-success btn-bl" ng-click="addMoney(3)" ng-disabled="canAdd(3)">+3</button>
+        <button class="btn btn-success btn-bl" ng-click="addMoney(1)" ng-disabled="!canAdd(1)">+1</button>
+        <button class="btn btn-success btn-bl" ng-click="addMoney(2)" ng-disabled="!canAdd(2)">+2</button>
+        <button class="btn btn-success btn-bl" ng-click="addMoney(3)" ng-disabled="!canAdd(3)">+3</button>
         <br/>
-        <button class="btn btn-danger btn-bl" ng-click="addMoney(-2)" ng-disabled="canAdd(-2)">-2</button>
-        <button class="btn btn-danger btn-bl" ng-click="addMoney(-3)" ng-disabled="canAdd(-3)">-3</button>
-        <button class="btn btn-danger btn-bl" ng-click="addMoney(-7)" ng-disabled="canAdd(-7)">-7</button>
+        <button class="btn btn-danger btn-bl" ng-click="addMoney(-2)" ng-disabled="!canAdd(-2)">-2</button>
+        <button class="btn btn-danger btn-bl" ng-click="addMoney(-3)" ng-disabled="!canAdd(-3)">-3</button>
+        <button class="btn btn-danger btn-bl" ng-click="addMoney(-7)" ng-disabled="!canAdd(-7)">-7</button>
       </div>
 
       <div style="font-size: 20px;">Money: {{ game.hand.money }}</div>
