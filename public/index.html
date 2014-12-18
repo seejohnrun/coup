@@ -22,7 +22,7 @@
 
       <div>
         <div ng-repeat="card in game.hand.cards track by $index">
-          <div style="padding:20px;background:#eee;font-size:20px;">{{ card.type }}</div>
+          <div style="padding:10px 20px;background:#eee;font-size:20px;">{{ card.type }}</div>
           <button class="btn btn-danger" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card</button>
           <button ng-if="!ambassadorSwapping && !card.lost"
             ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>
