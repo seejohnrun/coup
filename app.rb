@@ -29,10 +29,8 @@ get '/' do
   redirect '/index.html'
 end
 
-# TODO proper HTTP verbs
-
-# Draw a card
-get '/games/:game_id/players/:player_id/reset' do
+# Reset the game
+post '/games/:game_id/players/:player_id/reset' do
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   game.reset!
@@ -40,7 +38,7 @@ get '/games/:game_id/players/:player_id/reset' do
 end
 
 # Draw a card
-get '/games/:game_id/players/:player_id/draw' do
+post '/games/:game_id/players/:player_id/draw' do
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   params[:cards].to_i.times.each { game.draw_for(player) }
@@ -48,7 +46,7 @@ get '/games/:game_id/players/:player_id/draw' do
 end
 
 # Return a card
-get '/games/:game_id/players/:player_id/return/:card_token' do
+post '/games/:game_id/players/:player_id/return/:card_token' do
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   game.return_from(player, params[:card_token])
@@ -63,7 +61,7 @@ get '/games/:game_id/players/:player_id' do
 end
 
 # Adjust money
-get '/games/:game_id/players/:player_id/adjust_money/:amount' do
+post '/games/:game_id/players/:player_id/adjust_money/:amount' do
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   player.adjust_money(params[:amount].to_i)
@@ -71,7 +69,7 @@ get '/games/:game_id/players/:player_id/adjust_money/:amount' do
 end
 
 # Lose influence
-get '/games/:game_id/players/:player_id/lose/:card_token' do
+post '/games/:game_id/players/:player_id/lose/:card_token' do
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   player.lose_influence(params[:card_token])

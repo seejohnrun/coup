@@ -16,23 +16,23 @@ angular.module('coup').service('GameService', ['$http', function ($http) {
   return {
 
     resetGame: function () {
-      return $http.get(pbase + '/reset');
+      return $http.post(pbase + '/reset');
     },
 
     loseCard: function (cardToken) {
-      return $http.get(pbase + '/lose/' + cardToken);
+      return $http.post(pbase + '/lose/' + cardToken);
     },
 
     adjustMoney: function (amount) {
-      return $http.get(pbase + '/adjust_money/' + amount);
+      return $http.post(pbase + '/adjust_money/' + amount);
     },
 
     returnCard: function (cardToken) {
-      return $http.get(pbase + '/return/' + cardToken);
+      return $http.post(pbase + '/return/' + cardToken);
     },
 
     draw: function (amount) {
-      return $http.get(pbase + '/draw?cards=' + amount.toString());
+      return $http.post(pbase + '/draw?cards=' + amount.toString());
     },
 
     refresh: function () {
