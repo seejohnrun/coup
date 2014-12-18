@@ -11,6 +11,7 @@ set :public_folder, 'public'
 def game_for(game, player)
   {
     me: player.token,
+    game_over: player.game_over?,
     deck_size: game.cards.count,
     hand: {
       cards: player.cards.map { |c| { type: c.type, token: c.token, lost: c.lost } },
