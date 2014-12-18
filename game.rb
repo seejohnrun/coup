@@ -15,6 +15,10 @@ class Player
     2.times { game.draw_for(self) }
   end
 
+  def game_over?
+    cards.all?(&:lost)
+  end
+
   def adjust_money(amount)
     @money += amount
   end

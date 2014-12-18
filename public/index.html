@@ -14,7 +14,7 @@
       <div class="row">
         <div ng-repeat="card in game.hand.cards track by $index" class="col-sm-3">
           <div style="padding:20px;background:#eee;font-size:20px">{{ card.type }}</div>
-          <button class="btn btn-danger" ng-click="returnCard(card)" ng-if="ambassadorSwapping">Return this card</button>
+          <button class="btn btn-danger" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card</button>
           <button ng-if="!ambassadorSwapping && !card.lost"
             ng-click="loseCard(card)" class="btn btn-default btn-mini">Lose Influence</button>
           <div ng-if="card.lost">INFLUENCE LOST</div>
@@ -27,10 +27,7 @@
 
       <hr/>
 
-
       <h2>Money: {{ game.hand.money }}</h2>
-
-      <br/>
 
         <button class="btn btn-success" ng-click="addMoney(1)" ng-disabled="canAdd(1)">+1</button>
         <button class="btn btn-success" ng-click="addMoney(2)" ng-disabled="canAdd(2)">+2</button>
@@ -46,12 +43,14 @@
       <table class="table">
         <thead>
           <th>Token</th>
+          <th>Game Over?</th>
           <th>Money</th>
           <th>Lost Influence</th>
         </thead>
         <tbody>
           <tr ng-repeat="player in game.players">
             <td>{{ player.token }}</td>
+            <td>{{ player.game_over ? 'Yes' : 'No' }}</td>
             <td>{{ player.money }}</td>
             <td>{{ player.card_types.join(', ') }}</td>
           </tr>

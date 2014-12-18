@@ -5,6 +5,7 @@ angular.module('coup').service('GameService', ['$http', function ($http) {
   'use strict';
 
   var playerToken = localStorage.coupToken;
+  if (playerToken === 'null') { playerToken = null; } // bug TODO
 
   if (!playerToken) {
     playerToken = localStorage.coupToken = prompt('Your name please:', Math.random().toString(36).substring(7));
