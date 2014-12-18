@@ -11,6 +11,9 @@ angular.module('coup').service('GameService', ['$http', function ($http) {
     playerToken = localStorage.coupToken = prompt('Your name please:', Math.random().toString(36).substring(7));
   }
 
+  // TODO: better sanitize (pass token instead of name)
+  playerToken = playerToken.replace(/\W/g, '');
+
   var base = '';
   var pbase = base + '/games/abc/players/' + playerToken;
 
