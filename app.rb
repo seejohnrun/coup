@@ -6,6 +6,7 @@ GAMES = Hash.new { |h, k| h[k] = Game.new }
 
 # config
 set :content_type, :json
+set :public_folder, 'public'
 
 def game_for(game, player)
   {
@@ -22,6 +23,10 @@ def game_for(game, player)
       }
     end
   }
+end
+
+get '/' do
+  redirect '/index.html'
 end
 
 # Draw a card
