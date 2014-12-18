@@ -96,7 +96,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
       return $scope.game.hand.money <= 10;
     } else {
       var res = $scope.game.hand.money + amount;
-      return res > 0;
+      return res >= 0;
     }
   };
 
