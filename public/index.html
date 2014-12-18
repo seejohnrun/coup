@@ -50,7 +50,11 @@
         <tbody>
           <tr ng-repeat="player in game.players">
             <td>{{ player.token }}</td>
-            <td>{{ player.game_over ? 'Yes' : 'No' }}</td>
+            <td>
+              <span class="label" ng-class="{'label-danger': player.game_over,'label-success': !player.game_over}">
+                {{ player.game_over ? 'Yes' : 'Not Yet' }}
+              </span>
+            </td>
             <td>{{ player.money }}</td>
             <td>{{ player.card_types.join(', ') }}</td>
           </tr>
