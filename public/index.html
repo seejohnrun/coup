@@ -27,14 +27,16 @@
 
       <hr/>
 
-      <h2>Money: {{ game.hand.money }}</h2>
-
+      <div class="pull-right">
         <button class="btn btn-success" ng-click="addMoney(1)" ng-disabled="canAdd(1)">+1</button>
         <button class="btn btn-success" ng-click="addMoney(2)" ng-disabled="canAdd(2)">+2</button>
         <button class="btn btn-success" ng-click="addMoney(3)" ng-disabled="canAdd(3)">+3</button>
         <button class="btn btn-danger" ng-click="addMoney(-2)" ng-disabled="canAdd(-2)">-2</button>
         <button class="btn btn-danger" ng-click="addMoney(-3)" ng-disabled="canAdd(-3)">-3</button>
         <button class="btn btn-danger" ng-click="addMoney(-7)" ng-disabled="canAdd(-7)">-7</button>
+      </div>
+
+      <h2>Money: {{ game.hand.money }}</h2>
 
       <hr/>
 
