@@ -44,8 +44,7 @@ class Game
   attr_reader :players, :cards
 
   def initialize
-    @cards = (CARD_TYPES * 3).map { |c| Card.new(c) }
-    @players = Hash.new { |h, k| h[k] = Player.new(self, k) }
+    reset!
   end
 
   # Draw a card (shuffle first)
@@ -58,6 +57,11 @@ class Game
     idx = player.cards.index { |c| c.token == card_token }
     card = player.cards.delete_at(idx)
     @cards << card
+  end
+
+  def reset!
+    @cards = (CARD_TYPES * 3).map { |c| Card.new(c) }
+    @players = Hash.new { |h, k| h[k] = Player.new(self, k) }
   end
 
 end

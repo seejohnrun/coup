@@ -10,28 +10,33 @@ angular.module('coup').service('GameService', ['$http', function ($http) {
     playerToken = localStorage.coupToken = prompt('Your name please:', Math.random().toString(36).substring(7));
   }
 
-  var base = 'http://localhost:9292/games/abc/players/' + playerToken;
+  var base = '';
+  var pbase = base + '/games/abc/players/' + playerToken;
 
   return {
 
+    resetGame: function () {
+      return $http.get(pbase + '/reset');
+    },
+
     loseCard: function (cardToken) {
-      return $http.get(base + '/lose/' + cardToken);
+      return $http.get(pbase + '/lose/' + cardToken);
     },
 
     adjustMoney: function (amount) {
-      return $http.get(base + '/adjust_money/' + amount);
+      return $http.get(pbase + '/adjust_money/' + amount);
     },
 
     returnCard: function (cardToken) {
-      return $http.get(base + '/return/' + cardToken);
+      return $http.get(pbase + '/return/' + cardToken);
     },
 
     draw: function (amount) {
-      return $http.get(base + '/draw?cards=' + amount.toString());
+      return $http.get(pbase + '/draw?cards=' + amount.toString());
     },
 
     refresh: function () {
-      return $http.get(base);
+      return $http.get(pbase);
     }
 
   };
@@ -84,6 +89,13 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   $scope.canAdd = function (amount) {
     var res = $scope.game.hand.money + amount;
     return res < 0 || res >= 10;
+  };
+
+  $scope.resetGame = function () {
+    if (!confirm('Are you sure?')) { return; }
+    GameService.resetGame().then(function (response) {
+      $scope.game = response.data;
+    });
   };
 
   // BOOTSTRAP

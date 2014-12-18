@@ -29,9 +29,18 @@ get '/' do
   redirect '/index.html'
 end
 
+# TODO proper HTTP verbs
+
+# Draw a card
+get '/games/:game_id/players/:player_id/reset' do
+  game = GAMES[params[:game_id]]
+  player = game.players[params[:player_id]]
+  game.reset!
+  game_for(game, player).to_json
+end
+
 # Draw a card
 get '/games/:game_id/players/:player_id/draw' do
-  response['Access-Control-Allow-Origin'] = 'null'
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   params[:cards].to_i.times.each { game.draw_for(player) }
@@ -40,7 +49,6 @@ end
 
 # Return a card
 get '/games/:game_id/players/:player_id/return/:card_token' do
-  response['Access-Control-Allow-Origin'] = 'null'
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   game.return_from(player, params[:card_token])
@@ -49,7 +57,6 @@ end
 
 # Refresh game
 get '/games/:game_id/players/:player_id' do
-  response['Access-Control-Allow-Origin'] = 'null'
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   game_for(game, player).to_json
@@ -57,16 +64,14 @@ end
 
 # Adjust money
 get '/games/:game_id/players/:player_id/adjust_money/:amount' do
-  response['Access-Control-Allow-Origin'] = 'null'
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   player.adjust_money(params[:amount].to_i)
   game_for(game, player).to_json
 end
 
-# Adjust money
+# Lose influence
 get '/games/:game_id/players/:player_id/lose/:card_token' do
-  response['Access-Control-Allow-Origin'] = 'null'
   game = GAMES[params[:game_id]]
   player = game.players[params[:player_id]]
   player.lose_influence(params[:card_token])
