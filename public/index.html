@@ -5,56 +5,62 @@
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+
+    <style>
+      .btn { border-radius: 0; border-width: 0; }
+      .btn-bl { width: 50px; margin-bottom: 10px; text-align: center; }
+    </style>
   </head>
 
   <body ng-app="coup" ng-controller="GameCtrl">
 
     <div class="container">
 
-      <div class="row">
-        <div ng-repeat="card in game.hand.cards track by $index" class="col-sm-3">
-          <div style="padding:20px;background:#eee;font-size:20px">{{ card.type }}</div>
+      <br/>
+
+      <div>
+        <div ng-repeat="card in game.hand.cards track by $index">
+          <div style="padding:20px;background:#eee;font-size:20px;">{{ card.type }}</div>
           <button class="btn btn-danger" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card</button>
           <button ng-if="!ambassadorSwapping && !card.lost"
-            ng-click="loseCard(card)" class="btn btn-default btn-mini">Lose Influence</button>
-          <div ng-if="card.lost">INFLUENCE LOST</div>
+            ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>
+          <button ng-if="card.lost" class="btn btn-danger btn-mini btn-block" disabled>INFLUENCE LOST</button>
+          <br/>
         </div>
-        <div ng-if="!ambassadorSwapping" class="col-sm-3">
-          <button ng-click="startSwap()" class="btn btn-primary">Initiate Ambassador Swap</button>
-          <hr/>
+        <div ng-if="!ambassadorSwapping">
+          <button ng-click="startSwap()" class="btn btn-primary btn-block">Initiate Ambassador Swap</button>
         </div>
       </div>
 
       <hr/>
 
       <div class="pull-right">
-        <button class="btn btn-success" ng-click="addMoney(1)" ng-disabled="canAdd(1)">+1</button>
-        <button class="btn btn-success" ng-click="addMoney(2)" ng-disabled="canAdd(2)">+2</button>
-        <button class="btn btn-success" ng-click="addMoney(3)" ng-disabled="canAdd(3)">+3</button>
-        <button class="btn btn-danger" ng-click="addMoney(-2)" ng-disabled="canAdd(-2)">-2</button>
-        <button class="btn btn-danger" ng-click="addMoney(-3)" ng-disabled="canAdd(-3)">-3</button>
-        <button class="btn btn-danger" ng-click="addMoney(-7)" ng-disabled="canAdd(-7)">-7</button>
+        <button class="btn btn-success btn-bl" ng-click="addMoney(1)" ng-disabled="canAdd(1)">+1</button>
+        <button class="btn btn-success btn-bl" ng-click="addMoney(2)" ng-disabled="canAdd(2)">+2</button>
+        <button class="btn btn-success btn-bl" ng-click="addMoney(3)" ng-disabled="canAdd(3)">+3</button>
+        <br/>
+        <button class="btn btn-danger btn-bl" ng-click="addMoney(-2)" ng-disabled="canAdd(-2)">-2</button>
+        <button class="btn btn-danger btn-bl" ng-click="addMoney(-3)" ng-disabled="canAdd(-3)">-3</button>
+        <button class="btn btn-danger btn-bl" ng-click="addMoney(-7)" ng-disabled="canAdd(-7)">-7</button>
       </div>
 
-      <h2>Money: {{ game.hand.money }}</h2>
+      <div style="font-size: 20px;">Money: {{ game.hand.money }}</div>
+      <div style="clear:right;"></div>
 
       <hr/>
 
-      <h2>Table</h2>
-
       <table class="table">
         <thead>
-          <th>Token</th>
-          <th>Game Over?</th>
-          <th>Money</th>
+          <th>Name</th>
+          <th>$</th>
           <th>Lost Influence</th>
         </thead>
         <tbody>
           <tr ng-repeat="player in game.players">
-            <td>{{ player.token }}</td>
             <td>
+              {{ player.token }}
               <span class="label" ng-class="{'label-danger': player.game_over,'label-success': !player.game_over}">
-                {{ player.game_over ? 'Yes' : 'Not Yet' }}
+                {{ player.game_over ? ':(' : ':)' }}
               </span>
             </td>
             <td>{{ player.money }}</td>
@@ -65,12 +71,14 @@
 
       <hr/>
 
+      <div class="pull-right">
+        <button ng-click="resetGame()" class="btn btn-xs btn-danger">New Game</button>
+      </div>
+
       <small>
         Signed in as: {{ game.me }}
         <br/>
         Current Deck Size: {{ game.deck_size }}
-        <br/>
-        <button ng-click="resetGame()" class="btn btn-xs btn-danger">New Game</button>
       </small>
 
     </div>
