@@ -79,6 +79,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   };
 
   $scope.loseCard = function (card) {
+    if (!confirm('Are you sure?')) { return; }
     GameService.loseCard(card.token).then(function (response) {
       $scope.game = response.data;
     });
