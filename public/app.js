@@ -93,7 +93,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
 
   $scope.canAdd = function (amount) {
     var res = $scope.game.hand.money + amount;
-    return res < 0 || res >= 10;
+    return res < 0 || res > 10;
   };
 
   $scope.resetGame = function () {
