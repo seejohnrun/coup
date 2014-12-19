@@ -11,10 +11,14 @@
     <style>
       .btn { border-radius: 0; border-width: 0; }
       .btn-bl { width: 50px; margin-bottom: 10px; text-align: center; }
+      #focus { color: #fff; font-size: 30px; text-align: center; position: absolute; top: 0; right: 0;
+        left: 0; bottom: 0; padding-top: 275px; z-index: 100; background: #000; }
     </style>
   </head>
 
   <body ng-app="coup" ng-controller="GameCtrl">
+
+    <div id="focus" ng-show="focusVisible" ng-click="disableFocus()">{{ focusText }}</div>
 
     <div class="container">
 
@@ -22,10 +26,9 @@
 
       <div ng-if="!game.game_over">
         <div ng-repeat="card in game.hand.cards track by $index">
-          <div style="padding:10px 20px;background:#eee;font-size:20px;">{{ card.type }}</div>
+          <div style="padding:10px 20px;background:#eee;font-size:20px;text-align:center;" ng-click="focus(card)">{{ card.type }}</div>
           <button class="btn btn-danger btn-block" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card</button>
-          <button ng-if="!ambassadorSwapping && !card.lost"
-            ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>
+          <button ng-if="!ambassadorSwapping && !card.lost" ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>
           <button ng-if="card.lost" class="btn btn-danger btn-mini btn-block" disabled>INFLUENCE LOST</button>
           <br/>
         </div>
