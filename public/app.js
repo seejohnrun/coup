@@ -102,6 +102,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   };
 
   $scope.canAdd = function (amount) {
+    if ($scope.game.game_over) { return false; }
     if (amount > 0) {
       return $scope.game.hand.money <= 10;
     } else {
