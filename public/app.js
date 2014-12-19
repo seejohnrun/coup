@@ -90,6 +90,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
     GameService.returnCard(card.token).then(function () {
       GameService.draw(1).then(function (response) {
         $scope.game = response.data;
+        $scope.disableFocus();
       });
     });
   };
@@ -121,7 +122,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   $scope.focus = function (card) {
     if ($scope.ambassadorSwapping) { return; }
     $scope.focusVisible = true;
-    $scope.focusText = card.type;
+    $scope.focusCard = card;
   };
 
   $scope.disableFocus = function () {
