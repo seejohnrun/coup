@@ -85,6 +85,14 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
     });
   };
 
+  $scope.burnCard = function (card) {
+    GameService.returnCard(card.token).then(function () {
+      GameService.draw(1).then(function (response) {
+        $scope.game = response.data;
+      });
+    });
+  };
+
   $scope.addMoney = function (amount) {
     GameService.adjustMoney(amount).then(function (response) {
       $scope.game = response.data;

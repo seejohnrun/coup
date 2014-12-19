@@ -28,7 +28,14 @@
         <div ng-repeat="card in game.hand.cards track by $index">
           <div style="padding:10px 20px;background:#eee;font-size:20px;text-align:center;" ng-click="focus(card)">{{ card.type }}</div>
           <button class="btn btn-danger btn-block" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card</button>
-          <button ng-if="!ambassadorSwapping && !card.lost" ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>
+          <div class="row">
+            <div class="col-xs-6">
+              <button ng-if="!ambassadorSwapping && !card.lost" ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>
+            </div>
+            <div class="col-xs-6">
+              <button ng-if="!ambassadorSwapping && !card.lost" ng-click="burnCard(card)" class="btn btn-danger btn-mini btn-block">Burn Card</button>
+            </div>
+          </div>
           <button ng-if="card.lost" class="btn btn-danger btn-mini btn-block" disabled>INFLUENCE LOST</button>
           <br/>
         </div>
@@ -68,6 +75,7 @@
           <tr ng-repeat="player in game.players">
             <td>
               {{ player.token }}
+              &nbsp;
               <span class="label" ng-class="{'label-danger': player.game_over,'label-success': !player.game_over}">
                 {{ player.game_over ? ':(' : ':)' }}
               </span>
