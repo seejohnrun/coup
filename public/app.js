@@ -90,10 +90,8 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
     GameService.returnCard(card.token).then(function () {
       GameService.draw(1).then(function (response) {
         $scope.game = response.data;
-        $scope.disableFocus();
       });
     });
-    return false;
   };
 
   $scope.addMoney = function (amount) {

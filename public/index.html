@@ -21,7 +21,7 @@
     <div id="focus" ng-show="focusVisible" ng-click="disableFocus()">
       I am a real<br/>{{ focusCard.type }}.
       <div style="position:absolute;bottom: 20px;left: 20px; right: 20px; text-align: center;">
-        <button class="btn btn-danger" ng-click="burnCard(card)">Trade Card</button>
+        <button class="btn btn-danger" ng-click="burnCard(focusCard);disableFocus()">Trade Card</button>
       </div>
     </div>
 
