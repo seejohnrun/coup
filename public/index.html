@@ -12,13 +12,13 @@
       .btn { border-radius: 0; border-width: 0; }
       .btn-bl { width: 50px; margin-bottom: 10px; text-align: center; }
       #focus { color: #fff; font-size: 30px; text-align: center; position: absolute; top: 0; right: 0;
-        left: 0; bottom: 0; padding-top: 275px; z-index: 100; background: #000; }
+        left: 0; bottom: 0; padding-top: 200px; z-index: 100; background: #000; }
     </style>
   </head>
 
   <body ng-app="coup" ng-controller="GameCtrl">
 
-    <div id="focus" ng-show="focusVisible" ng-click="disableFocus()">{{ focusText }}</div>
+    <div id="focus" ng-show="focusVisible" ng-click="disableFocus()">I am a real<br/>{{ focusText }}.</div>
 
     <div class="container">
 

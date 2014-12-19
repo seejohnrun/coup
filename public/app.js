@@ -109,7 +109,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
 
   $scope.focus = function (card) {
     $scope.focusVisible = true;
-    $scope.focusText = 'I am a real ' + card.type + '.';
+    $scope.focusText = card.type;
   };
 
   $scope.disableFocus = function () {
