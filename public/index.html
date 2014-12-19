@@ -83,6 +83,9 @@
             <td>{{ player.money }}</td>
             <td>{{ player.card_types.join(', ') }}</td>
           </tr>
+          <tr ng-if="game.players.length === 0">
+            <td colspan="999"><em>No other players yet</em></td>
+          </tr>
         </tbody>
       </table>
 
