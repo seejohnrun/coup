@@ -93,6 +93,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
         $scope.disableFocus();
       });
     });
+    return false;
   };
 
   $scope.addMoney = function (amount) {
