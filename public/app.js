@@ -95,6 +95,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   };
 
   $scope.addMoney = function (amount) {
+    if ($scope.game.game_over) { return; }
     GameService.adjustMoney(amount).then(function (response) {
       $scope.game = response.data;
     });
