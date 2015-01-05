@@ -86,7 +86,6 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   };
 
   $scope.burnCard = function (card) {
-    if (!confirm('Are you sure?')) { return; }
     GameService.returnCard(card.token).then(function () {
       GameService.draw(1).then(function (response) {
         $scope.game = response.data;
@@ -119,6 +118,7 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   };
 
   $scope.focus = function (card) {
+    if (!confirm('Are you sure?')) { return; }
     if ($scope.ambassadorSwapping) { return; }
     $scope.focusVisible = true;
     $scope.focusCard = card;
