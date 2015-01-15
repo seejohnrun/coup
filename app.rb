@@ -17,7 +17,7 @@ def game_for(game, player)
       cards: player.cards.map { |c| { type: c.type, token: c.token, lost: c.lost } },
       money: player.money
     },
-    players: game.players.values.reject { |p| p == player }.map do |p|
+    players: game.players.values.reject { |p| p == player || p.cards.empty? }.map do |p|
       {
         token: p.token,
         game_over: p.game_over?,
