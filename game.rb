@@ -7,16 +7,16 @@ class Player
   attr_reader :cards, :money, :token
 
   def initialize(game, token)
+    @lost = false
     @game = game
     @cards = []
     @token = token
 
     @money = 2
-    2.times { game.draw_for(self) }
   end
 
   def game_over?
-    cards.all?(&:lost)
+    @lost
   end
 
   def adjust_money(amount)
@@ -26,6 +26,7 @@ class Player
   def lose_influence(card_token)
     card = cards.detect { |c| c.token == card_token }
     card.lost = true
+    @lost = true if cards.all?(&:lost)
   end
 
 end

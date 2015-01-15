@@ -8,7 +8,7 @@ angular.module('coup').service('GameService', ['$http', function ($http) {
   if (playerToken === 'null') { playerToken = null; } // bug TODO
 
   if (!playerToken) {
-    playerToken = localStorage.coupToken = prompt('Your name please:', Math.random().toString(36).substring(7));
+    playerToken = localStorage.coupToken = prompt('Your name please:');
   }
 
   // TODO: better sanitize (pass token instead of name)
@@ -62,6 +62,12 @@ angular.module('coup').controller('GameCtrl', ['$scope', '$interval', 'GameServi
   $scope.ambassadorSwapping = false;
   $scope.startSwap = function (amount) {
     $scope.ambassadorSwapping = true;
+    GameService.draw(2).then(function (response) {
+      $scope.game = response.data;
+    });
+  };
+
+  $scope.startGame = function () {
     GameService.draw(2).then(function (response) {
       $scope.game = response.data;
     });

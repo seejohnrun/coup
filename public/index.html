@@ -29,6 +29,10 @@
 
       <br/>
 
+      <div ng-if="!game.game_over && game.hand.cards.length == 0">
+        <a class="btn btn-success btn-block" ng-click="startGame()">Enter Game</a>
+      </div>
+
       <div ng-if="!game.game_over">
         <div ng-repeat="card in game.hand.cards track by $index">
           <div style="padding:10px 20px;background:#eee;font-size:20px;text-align:center;">{{ card.type }}</div>
@@ -43,7 +47,7 @@
           <button ng-if="card.lost" class="btn btn-danger btn-mini btn-block" disabled>INFLUENCE LOST</button>
           <br/>
         </div>
-        <div ng-if="!ambassadorSwapping">
+        <div ng-if="!ambassadorSwapping && game.hand.cards.length">
           <button ng-click="startSwap()" class="btn btn-primary btn-block">Initiate Ambassador Swap</button>
         </div>
       </div>
@@ -52,20 +56,24 @@
         Game over for you :(
       </div>
 
-      <hr/>
+      <div ng-if="game.hand.cards.length">
 
-      <div class="pull-right">
-        <button class="btn btn-success btn-bl" ng-click="addMoney(1)" ng-disabled="!canAdd(1)">+1</button>
-        <button class="btn btn-success btn-bl" ng-click="addMoney(2)" ng-disabled="!canAdd(2)">+2</button>
-        <button class="btn btn-success btn-bl" ng-click="addMoney(3)" ng-disabled="!canAdd(3)">+3</button>
-        <br/>
-        <button class="btn btn-danger btn-bl" ng-click="addMoney(-2)" ng-disabled="!canAdd(-2)">-2</button>
-        <button class="btn btn-danger btn-bl" ng-click="addMoney(-3)" ng-disabled="!canAdd(-3)">-3</button>
-        <button class="btn btn-danger btn-bl" ng-click="addMoney(-7)" ng-disabled="!canAdd(-7)">-7</button>
+        <hr/>
+
+        <div class="pull-right">
+          <button class="btn btn-success btn-bl" ng-click="addMoney(1)" ng-disabled="!canAdd(1)">+1</button>
+          <button class="btn btn-success btn-bl" ng-click="addMoney(2)" ng-disabled="!canAdd(2)">+2</button>
+          <button class="btn btn-success btn-bl" ng-click="addMoney(3)" ng-disabled="!canAdd(3)">+3</button>
+          <br/>
+          <button class="btn btn-danger btn-bl" ng-click="addMoney(-2)" ng-disabled="!canAdd(-2)">-2</button>
+          <button class="btn btn-danger btn-bl" ng-click="addMoney(-3)" ng-disabled="!canAdd(-3)">-3</button>
+          <button class="btn btn-danger btn-bl" ng-click="addMoney(-7)" ng-disabled="!canAdd(-7)">-7</button>
+        </div>
+
+        <div style="font-size: 20px;">Money: {{ game.hand.money }}</div>
+        <div style="clear:right;"></div>
+
       </div>
-
-      <div style="font-size: 20px;">Money: {{ game.hand.money }}</div>
-      <div style="clear:right;"></div>
 
       <hr/>
 
