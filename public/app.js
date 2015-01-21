@@ -7,15 +7,20 @@ angular.module('coup').service('GameService', ['$http', function ($http) {
   var playerToken = localStorage.coupToken;
   if (playerToken === 'null') { playerToken = null; } // bug TODO
 
-  if (!playerToken) {
-    playerToken = localStorage.coupToken = prompt('Your name please:');
+  while (!playerToken) {
+    playerToken = localStorage.coupToken = prompt('Your name please?');
+  }
+
+  var roomToken;
+  while (!roomToken) {
+    roomToken = prompt('What room do you want to join?', 'lobby');
   }
 
   // TODO: better sanitize (pass token instead of name)
   playerToken = playerToken.replace(/\W/g, '');
 
   var base = '';
-  var pbase = base + '/games/abc/players/' + playerToken;
+  var pbase = base + '/games/' + roomToken + '/players/' + playerToken;
 
   return {
 

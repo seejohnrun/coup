@@ -16,7 +16,7 @@
     </style>
   </head>
 
-  <body ng-app="coup" ng-controller="GameCtrl">
+  <body ng-app="coup" ng-controller="GameCtrl" style="display:none;" ng-style="{display:game ? 'block' : 'none'}">
 
     <div id="focus" ng-show="focusVisible">
       I am a real<br/>{{ focusCard.type }}!
