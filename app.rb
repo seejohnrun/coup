@@ -1,5 +1,7 @@
-require 'json'
-require_relative 'game'
+# frozen_string_literal: true
+
+require "json"
+require_relative "coup/game"
 
 # The collection of games and players
 GAMES = Hash.new { |h, k| h[k] = Game.new }
