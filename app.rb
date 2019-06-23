@@ -14,6 +14,16 @@ get '/' do
   redirect '/index.html'
 end
 
+# List all games
+get '/games' do
+  GAMES.map do |key, value|
+    {
+      name: key,
+      player_count: value.players.size
+    }
+  end.to_json
+end
+
 # Reset the game
 post '/games/:game_id/players/:player_id/reset' do
   game    = GAMES[params[:game_id]]
