@@ -5,6 +5,16 @@ for coup, and let you play on your phones (still in person - don't be a loser!)
 
 Use it at: https://sqoup.herokuapp.com
 
----
+## Getting Started
 
-![](https://dl.dropboxusercontent.com/u/382827474/screenshots/2015-04-21_0013.png)
+To get started with the app, clone the repo and then install the needed gems:
+
+```
+bundle install
+```
+
+Run the local server:
+
+```
+bundle exec rackup config.ru --port 8080
+```
