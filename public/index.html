@@ -35,8 +35,9 @@
 
       <div ng-if="!game.game_over">
         <div ng-repeat="card in game.hand.cards track by $index">
+          <div style="background: #9fe79f; font-size: 14px; text-align: center;" ng-if="ambassadorSwapping && card.active">current</div>
           <div style="padding:10px 20px;background:#eee;font-size:20px;text-align:center;">{{ card.type }}</div>
-          <button class="btn btn-danger btn-block" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card</button>
+          <button class="btn btn-danger btn-block" ng-click="returnCard(card)" ng-if="ambassadorSwapping && !card.lost">Return this card to deck</button>
           <div class="row">
             <div class="col-xs-6">
               <button ng-if="!ambassadorSwapping && !card.lost" ng-click="loseCard(card)" class="btn btn-danger btn-mini btn-block">Lose Influence</button>

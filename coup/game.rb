@@ -15,12 +15,19 @@ class Game
   # Draw a card (shuffle first)
   def draw_for(player, count = 1)
     @cards.shuffle!
-    count.times { player.cards << @cards.pop }
+    count.times do
+      break if player.cards.size >= 4
+      new_card = @cards.pop
+      new_card.active = false if player.cards.size >= 2
+      player.cards << new_card
+    end
   end
 
   def return_from(player, card_token)
     idx = player.cards.index { |c| c.token == card_token }
     card = player.cards.delete_at(idx)
+    card.active = false
+    player.cards.each { |c| c.active = true } if player.cards.size == 2
     @cards << card
   end
 
@@ -35,17 +42,34 @@ class Game
       game_over: player.game_over?,
       deck_size: cards.count,
       hand: {
-        cards: player.cards.map { |c| { type: c.type, token: c.token, lost: c.lost } },
+        cards: list_player_cards(player),
         money: player.money
       },
-      players: players.values.reject { |p| p == player || p.cards.empty? }.map do |p|
-        {
-          token: p.token,
-          game_over: p.game_over?,
-          money: p.money,
-          card_types: p.cards.select(&:lost).map(&:type)
-        }
-      end
+      players: list_other_players(player)
     }.to_json
+  end
+
+  private
+
+  def list_player_cards(player)
+    player.cards.map do |c|
+      {
+        type: c.type,
+        token: c.token,
+        lost: c.lost,
+        active: c.active
+      }
+    end
+  end
+
+  def list_other_players(player)
+    players.values.reject { |p| p == player || p.cards.empty? }.map do |p|
+      {
+        token: p.token,
+        game_over: p.game_over?,
+        money: p.money,
+        card_types: p.cards.select(&:lost).map(&:type)
+      }
+    end
   end
 end
