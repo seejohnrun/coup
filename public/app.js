@@ -1,4 +1,4 @@
-angular.module('coup', {});
+angular.module('coup', []);
 
 angular.module('coup').service('GameService', ['$http', function ($http) {
 
