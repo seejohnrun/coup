@@ -29,7 +29,7 @@ post '/games/:game_id/players/:player_id/reset' do
   game    = GAMES[params[:game_id]]
   player  = game.players[params[:player_id]]
 
-  game.reset!
+  game.reset!(player)
   game.to_json(player)
 end
 
@@ -66,6 +66,7 @@ post '/games/:game_id/players/:player_id/adjust_money/:amount' do
   player  = game.players[params[:player_id]]
   amount  = params[:amount].to_i
 
+  game.log_action(player, "Took #{amount}.")
   player.adjust_money(amount)
   game.to_json(player)
 end
@@ -76,6 +77,7 @@ post '/games/:game_id/players/:player_id/lose/:card_token' do
   player  = game.players[params[:player_id]]
   card    = params[:card_token]
   
+  game.log_action(player, "Lost influence.")
   player.lose_influence(card)
   game.to_json(player)
 end

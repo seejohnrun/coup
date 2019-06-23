@@ -116,6 +116,23 @@
       </small>
 
       <br/>
+      <hr/>
+
+      <table class="table">
+        <thead>
+          <th>Name</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="log in game.activity_logs">
+            <td>{{ log.player_token }}</td>
+            <td>{{ log.message }}</td>
+          </tr>
+          <tr ng-if="game.activity_logs.length === 0">
+            <td colspan="999"><em>No activity yet</em></td>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
 
